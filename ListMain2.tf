@@ -1,3 +1,3 @@
-resource "random_list" "my-list" {
+resource "random_pet" "my-list" {
  prefix  = var.prefix[0]
 }
