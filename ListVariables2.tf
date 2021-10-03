@@ -1,3 +1,4 @@
 variable "prefix" {
-  default = ["Vijay", "Kumar", "Biradar"]   **default is optional!!!
-  type = list(string)
+  default = ["Vijay", "Kumar", "Biradar"]
+  type = list
+}
