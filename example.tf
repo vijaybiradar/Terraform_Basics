@@ -1,3 +1,14 @@
+https://www.bojankomazec.com/2022/03/introduction-to-terraform.html
+
+https://www.bojankomazec.com/2022/05/terraform-state.html
+https://www.bojankomazec.com/2022/05/terraform-resource-dependencies.html
+https://www.bojankomazec.com/2022/05/terraform-state.html
+
+https://www.bojankomazec.com/2022/04/terraform-variables.html
+
+https://www.bojankomazec.com/search?q=terraform
+
+
 Types of TF variables:
 input
 output
