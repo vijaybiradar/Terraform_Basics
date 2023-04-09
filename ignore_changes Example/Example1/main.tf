@@ -1,7 +1,7 @@
 resource "local_file" "hello" {
-  filename        = "Hello.txt"
-  content         = "Hello Vijay Biradar"
-  file_permission = "0700"
+  filename        = var.filename
+  content         = var.content
+  file_permission = var.file_permission
 
   lifecycle {
     ignore_changes = [
