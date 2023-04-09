@@ -1,27 +1,28 @@
-Terraform Local File Example
+# Terraform Local File Example
 This Terraform configuration creates a local_file resource that writes a greeting message to a file called Hello.txt.
 
-Usage
-Clone the repository:
+# Usage
+# Clone the repository:
 
 git clone https://github.com/vijaybiradar/Terraform_Test.git
-Change directory to the repository:
+
+# Change directory to the repository:
 
 cd Local_File_Example
-Initialize the Terraform configuration:
+# Initialize the Terraform configuration:
 
 terraform init
-Apply the Terraform configuration:
+# Apply the Terraform configuration:
 
 terraform apply -var name="Vijay"
 This will create a file called Hello.txt with the content "Hello, Vijay!" in the current directory.
 
-Inputs:
+# Inputs:
 
 Name	Description	Type	Default
 name	The name to include in the greeting message	string	"World"
 
-Outputs:
+# Outputs:
 
 Name	Description
 hello_file_path	The file path of the Hello.txt file
