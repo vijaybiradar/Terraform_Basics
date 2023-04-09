@@ -4,12 +4,16 @@ This Terraform module creates a local file with the specified content and file p
 
 ## Usage
 
-To create the local file, run `terraform apply` and specify the filename, content, and file permission as variables:
+# How to use this Terraform code
 
-terraform apply -var 'filename=Hello.txt' -var 'content=Hello, world!' -var 'file_permission=0700'
+1. Navigate to the directory containing these files in your terminal.
+2. Run `terraform init` to initialize the backend and install required plugins.
+3. Run `terraform apply -var 'filename=Hello.txt' -var 'content=Hello, world!' -var 'file_permission=0700'` to create the local file.
+4. When prompted, type `yes` to confirm the creation of the resource.
+5. Run `terraform output` to view the output values.
+6. To destroy the local file resource, run `terraform destroy`.
 
-perl
-Copy code
+
 
 ## Inputs
 
