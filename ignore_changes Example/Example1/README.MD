@@ -1,6 +1,7 @@
 # ignore_changes with a Terraform local file module
 
-This Terraform module creates a local file with the specified content and file permission.
+This Terraform module creates a local file with the specified content and file permission and ignore_changes Parameter.
+
 
 ## Usage
 
