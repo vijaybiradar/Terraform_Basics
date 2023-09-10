@@ -1,4 +1,6 @@
+# variable.tf
+# Define the prefix variable as a list of strings with a default value.
 variable "prefix" {
-  default = ["CAT", "DOG", "Monkey"]  
-  type = list
+  type    = list(string)
+  default = ["CAT", "DOG", "MONKEY", "SQUIRREL", "ELEPHANT"]
 }
