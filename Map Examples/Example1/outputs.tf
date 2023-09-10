@@ -1,3 +1,6 @@
+# outputs.tf
+# Define outputs to display the shuffled word lists.
+
 output "shuffled_nouns" {
   value = random_shuffle.random_nouns.result
 }
