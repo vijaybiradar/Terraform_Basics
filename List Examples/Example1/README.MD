@@ -13,9 +13,12 @@ This Terraform configuration creates random names based on a list of prefixes an
 
 Format your Terraform configuration files for consistent styling.
 
+
 ```
 terraform fmt
 ```
+
+
 Step 2: Initialize the Provider
 Initialize Terraform and download the required provider plugins.
 
@@ -49,6 +52,11 @@ Sample Output:
 Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
 ```
 Step 5: Show State Details
+
+Terraform State
+Terraform maintains state information in a file called terraform.tfstate. This file keeps track of the current state of your infrastructure. It's important to manage this state file properly, especially in a team environment or for long-term projects.
+
+Viewing State
 Display detailed information about your infrastructure state.
 
 ```
