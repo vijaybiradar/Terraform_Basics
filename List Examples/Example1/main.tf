@@ -1,42 +1,26 @@
-## Create a directory name terraform and get inside it
-mkdir terraform && cd terraform
-## Create main.tf under terraform directory
-vi main.tf
+# main.tf
+# This Terraform configuration creates random names using the random_string resource and outputs values from a list variable.
 
-resource "random_pet" "my-list" {
- prefix  = var.prefix[0]
+# Create a random_string resource for each prefix in the list.
+resource "random_string" "my-list" {
+  count       = length(var.prefix)
+  length      = 8  # You can adjust the length as needed.
+  special     = false
+  upper       = false
+  number      = false
+  min_lower   = 3
+  min_special = 0
+  min_number  = 0
+  override    = {
+    special = "false"
+    upper   = "false"
+    number  = "false"
+  }
 }
 
-#Print the first elment of list..
-
-output "name"{
- value = var.prefix[0]
+# Output the generated names for each prefix.
+output "names" {
+  value = random_string.my-list[*].result
 }
 
-output "my-name"{
- value = random_pet.my-list.prefix
-}
-## Format the code
-terraform fmt
-## List files (Terraform stores the workspace states in a directory called terraform.tfstate.d)
-ls -ltrh #terraform created a new directory terraform.tfstate.d
-ls terraform.tfstate.d/ #terraform created a new directory test inside terraform.tfstate.d
- 
-## Initialize the provider
-terraform init
-## List files (Terraform stores the workspace states in a directory called terraform.tfstate.d)
-ls -ltrh #terraform created a new directory terraform.tfstate.d
-ls terraform.tfstate.d/ #terraform created a new directory test inside terraform.tfstate.d
- 
-## Plan the changes
-terraform plan
- 
-## Apply the changes
-terraform apply
- 
-## Show state details
-terraform show
- 
-## Cleanup
-## Destory resources
-terraform destory
+
