@@ -1,11 +1,27 @@
-variable "words" {
-     default = {
-         nouns = ["army", "panther", "walnuts", "sandwich", "Zeus", "banana", "cat", "jellyfish", "jigsaw", "violin", "milk", "sun"]
-         adjectives = ["bitter", "sticky", "thundering", "abundant", "chubby", "grumpy"]
-         verbs = ["run", "dance", "love", "respect", "kicked", "baked"]
-         adverbs = ["delicately", "beautifully", "quickly", "truthfully", "wearily"]
-         numbers = [42, 27, 101, 73, -5, 0]
-     }
-     description = "A word pool to use for Mad Libs"
-     type = map(list(string))
- }
+# main.tf
+# This Terraform configuration generates random words using the random_shuffle resource based on word categories.
+
+# Random Shuffle for Nouns
+resource "random_shuffle" "random_nouns" {
+  input = var.words["nouns"]
+}
+
+# Random Shuffle for Adjectives
+resource "random_shuffle" "random_adjectives" {
+  input = var.words["adjectives"]
+}
+
+# Random Shuffle for Verbs
+resource "random_shuffle" "random_verbs" {
+  input = var.words["verbs"]
+}
+
+# Random Shuffle for Adverbs
+resource "random_shuffle" "random_adverbs" {
+  input = var.words["adverbs"]
+}
+
+# Random Shuffle for Numbers
+resource "random_shuffle" "random_numbers" {
+  input = var.words["numbers"]
+}
