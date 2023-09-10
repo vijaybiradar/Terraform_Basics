@@ -8,19 +8,9 @@ resource "random_string" "my-list" {
   special     = false
   upper       = false
   number      = false
-  min_lower   = 3
-  min_special = 0
-  min_number  = 0
-  override    = {
-    special = "false"
-    upper   = "false"
-    number  = "false"
-  }
 }
 
 # Output the generated names for each prefix.
 output "names" {
-  value = random_string.my-list[*].result
+  value = [for i, name in random_string.my-list : format("%s%s", var.prefix[i], name.result)]
 }
-
-
