@@ -1,4 +1,4 @@
 variable "prefix" {
-  default = ["Vijay", "Kumar", "Biradar"]  
+  default = ["CAT", "DOG", "Monkey"]  
   type = list
 }
