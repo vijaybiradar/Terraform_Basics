@@ -1,4 +1,4 @@
-# Terraform Configuration Example
+# Terraform Configuration with list(string) Example
 
 
 This Terraform configuration generates random pet names using the random_pet resource based on age values. It outputs both the age variable and the generated pet name prefix.
