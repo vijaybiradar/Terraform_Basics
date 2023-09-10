@@ -1,4 +1,4 @@
-# Terraform Configuration Example
+# Terraform Configuration with list(string) Example
 
 This Terraform configuration creates random names based on a list of prefixes and outputs the generated names. 
 
