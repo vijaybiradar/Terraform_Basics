@@ -1,5 +1,5 @@
 
-# Terraform Configuration Example
+# Terraform Configuration with list(string) Example
 
 This Terraform configuration generates random pet names based on a list of prefixes and outputs the generated pet name along with the selected prefix.
 
