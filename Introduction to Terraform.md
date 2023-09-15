@@ -10,10 +10,29 @@ Variables enhance the flexibility and reusability of Terraform configurations. Y
 Example variable definition:
 
 ```
-variable "name" {
-  type = string
-  description = "Name for the resource"
+# Step 1: Variable Definition
+variable "resource_name" {
+  type        = string
+  description = "Name for the local_file resource"
+  default     = "default_file"
 }
+
+# Step 2: Using Variables
+resource "local_file" "hello" {
+  # Interpolation to dynamically set the filename based on the "resource_name" variable
+  filename = "${var.resource_name}.txt"
+  content  = "Hello, world!"
+}
+
+# Step 3: Setting Variable Values
+
+# You can set the variable value using the command-line argument:
+# terraform apply -var="resource_name=my_custom_file"
+
+# Or, you can set the variable value using an environment variable:
+# export TF_VAR_resource_name=my_custom_file
+# terraform apply
+
 ```
 Interpolation
 Interpolation enables dynamic resource creation or property modification by embedding variables or expressions within your configuration.
