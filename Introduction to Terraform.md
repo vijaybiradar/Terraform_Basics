@@ -27,6 +27,7 @@ resource "local_file" "hello" {
 }
 
 
+
 # Step 3: Setting Variable Values
 
 # You can set the variable value using the command-line argument:
@@ -37,7 +38,7 @@ resource "local_file" "hello" {
 # terraform apply
 ```
 
-```
+
 Interpolation
 Interpolation enables dynamic resource creation or property modification by embedding variables or expressions within your configuration.
 
