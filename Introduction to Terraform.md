@@ -17,12 +17,15 @@ variable "resource_name" {
   default     = "default_file"
 }
 
+
 # Step 2: Using Variables
+
 resource "local_file" "hello" {
   # Interpolation to dynamically set the filename based on the "resource_name" variable
   filename = "${var.resource_name}.txt"
   content  = "Hello, world!"
 }
+
 
 # Step 3: Setting Variable Values
 
@@ -32,6 +35,7 @@ resource "local_file" "hello" {
 # Or, you can set the variable value using an environment variable:
 # export TF_VAR_resource_name=my_custom_file
 # terraform apply
+```
 
 ```
 Interpolation
@@ -79,15 +83,67 @@ Example:
 
 ```
 variable "filenames" {
-  type    = list(string)
+  type = list(string)
   default = ["file-1", "file-2"]
 }
 
+variable "is_true" {
+  type = bool
+  default = true
+}
+
+variable "strings" {
+  type = list(string)
+  default = ["string-1", "string-2"]
+}
+
+variable "map_numbers" {
+  type = map(number)
+  default = {
+    number-1 = 10
+  }
+}
+
+variable "string_set" {
+  type = set(string)
+  default = ["string-1", "string-2"]
+}
+
+variable "user" {
+  type = object({
+    name  = string
+    age   = number
+    email = string
+  })
+
+  default = {
+    name  = "John Doe"
+    age   = 30
+    email = "johndoe@example.com"
+  }
+}
+
+resource "random_integer" "number" {
+  min = 1
+  max = 100
+}
 
 resource "example_resource" "instances" {
   count    = length(var.filenames)
   filename = element(var.filenames, count.index)
   content  = "Hello from instance ${count.index}!"
+}
+
+output "example_variables" {
+  value = {
+    filenames  = var.filenames
+    random_num = random_integer.number.result
+    is_true    = var.is_true
+    strings    = var.strings
+    numbers    = map(keys(var.map_numbers), values(var.map_numbers))
+    string_set = var.string_set
+    user       = var.user
+  }
 }
 ```
 State (terraform.tfstate) & terraform import
