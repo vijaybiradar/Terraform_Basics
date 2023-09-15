@@ -51,17 +51,27 @@ The user_data block customizes instances created by Terraform with initializatio
 Example usage:
 
 ```
-resource "aws_instance" "web_server" {
-  ami           = "ami-12345678"
-  instance_type = "t2.micro"
-
-  user_data = <<-EOF
-    #!/bin/bash
-    apt-get update
-    apt-get install -y nginx
-  EOF
+# Create a local file named "hello.txt" with the content "Hello, world!"
+resource "local_file" "hello" {
+  filename = "hello.txt"
+  content  = "Hello, world!"
 }
+
+# Define user data for an instance to be executed during boot time
+resource "local_file" "user_data" {
+  filename = "user_data.sh"
+  content = <<EOF
+#!/bin/bash
+
+# This script sets up user data for the instance
+echo "This is my user data" > /tmp/user_data.txt
+EOF
+}
+
 ```
+
+This Terraform configuration creates two files, "hello.txt" and "user_data.sh". "hello.txt" contains the text "Hello, world!", while "user_data.sh" includes a bash script responsible for configuring user data during instance boot time.
+
 Creating Multiple Instances (count, list type, and element() function)
 Use the count attribute to create multiple instances of a resource. Lists and the element() function manage these instances efficiently.
 
