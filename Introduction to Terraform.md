@@ -1,4 +1,4 @@
-Introduction to Terraform
+# Introduction to Terraform
 Terraform is a versatile, open-source Infrastructure as Code (IaC) tool designed for automating the provisioning and management of infrastructure resources. It leverages the HashiCorp Configuration Language (HCL), a declarative language that simplifies the definition of infrastructure resources.
 
 Terraform Configuration File
@@ -9,30 +9,29 @@ Variables enhance the flexibility and reusability of Terraform configurations. Y
 
 Example variable definition:
 
-hcl
-Copy code
+```
 variable "name" {
   type = string
   description = "Name for the resource"
 }
+```
 Interpolation
 Interpolation enables dynamic resource creation or property modification by embedding variables or expressions within your configuration.
 
 Example interpolation usage:
 
-hcl
-Copy code
+```
 resource "local_file" "hello" {
   filename = var.name
   content  = "Hello, world!"
 }
+```
 User Data
 The user_data block customizes instances created by Terraform with initialization scripts or data. It's useful for tasks like software installation and configuration.
 
 Example usage:
 
-hcl
-Copy code
+```
 resource "aws_instance" "web_server" {
   ami           = "ami-12345678"
   instance_type = "t2.micro"
@@ -43,23 +42,25 @@ resource "aws_instance" "web_server" {
     apt-get install -y nginx
   EOF
 }
+```
 Creating Multiple Instances (count, list type, and element() function)
 Use the count attribute to create multiple instances of a resource. Lists and the element() function manage these instances efficiently.
 
 Example:
 
-hcl
-Copy code
+```
 variable "filenames" {
   type    = list(string)
   default = ["file-1", "file-2"]
 }
+
 
 resource "example_resource" "instances" {
   count    = length(var.filenames)
   filename = element(var.filenames, count.index)
   content  = "Hello from instance ${count.index}!"
 }
+```
 State (terraform.tfstate) & terraform import
 Terraform maintains infrastructure state in the terraform.tfstate file. This file automatically records resource attributes and relationships. Use terraform import to incorporate existing resources into Terraform management.
 
@@ -67,9 +68,7 @@ Output Variables
 Output variables share specific information from your infrastructure with other configurations or for reference.
 
 Example output variable definition:
-
-hcl
-Copy code
+```
 resource "example_resource" "example_instance" {
   name = "example-instance"
 }
@@ -77,6 +76,7 @@ resource "example_resource" "example_instance" {
 output "instance_id" {
   value = example_resource.example_instance.id
 }
+```
 Destroy
 Execute terraform destroy to eliminate all resources created by a Terraform configuration. This command aids in cleaning up unnecessary infrastructure or reverting changes.
 
@@ -85,8 +85,7 @@ Modules structure and reuse Terraform configurations for enhanced organization a
 
 Example module directory structure:
 
-bash
-Copy code
+```
 modules/my_module/main.tf
 hcl
 Copy code
@@ -98,19 +97,20 @@ variable "module_var" {
 resource "example_resource" "example_instance" {
   name = "module-instance-${var.module_var}"
 }
+```
 Additional Concepts
 for_each
 The for_each block facilitates iteration over a list of values, creating a separate resource for each value. Ideal for dynamically generating resources.
 
 Example:
 
-hcl
-Copy code
+```
 resource "local_file" "hello" {
   for_each = var.filenames
   filename = each.value
   content  = "Hello, world!"
 }
+```
 Lifecycle
 Utilize the lifecycle block to configure how Terraform manages a resource throughout its lifespan. Specify creation, update, destruction, and other lifecycle-related actions.
 
