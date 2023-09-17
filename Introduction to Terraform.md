@@ -83,69 +83,73 @@ Use the count attribute to create multiple instances of a resource. Lists and th
 Example:
 
 ```
-variable "filenames" {
-  type = list(string)
-  default = ["file-1", "file-2"]
+# Specify the required Terraform version and required providers.
+terraform {
+  required_version = ">= 0.13"  # Specify the minimum Terraform version required.
+  required_providers {
+    random = {
+      source  = "hashicorp/random"
+      version = "~> 3.5"
+    }
+  }
 }
 
-variable "is_true" {
-  type = bool
-  default = true
+# Configure the "random" provider.
+provider "random" {}
+
+# Define variables with meaningful descriptions.
+variable "filenames" {
+  description = "A list of file names to create resources for."
+  type        = list(string)
+  default     = ["file-1", "file-2"]
+}
+
+variable "is_enabled" {
+  description = "A boolean variable to control resource creation."
+  type        = bool
+  default     = true
 }
 
 variable "strings" {
-  type = list(string)
-  default = ["string-1", "string-2"]
+  description = "A list of strings to use in the configuration."
+  type        = list(string)
+  default     = ["string-1", "string-2"]
 }
 
 variable "map_numbers" {
-  type = map(number)
-  default = {
-    number-1 = 10
+  description = "A map of numbers with named keys."
+  type        = map(number)
+  default     = {
+    key-1 = 10
   }
 }
 
-variable "string_set" {
-  type = set(string)
-  default = ["string-1", "string-2"]
-}
-
-variable "user" {
-  type = object({
-    name  = string
-    age   = number
-    email = string
-  })
-
-  default = {
-    name  = "John Doe"
-    age   = 30
-    email = "johndoe@example.com"
-  }
-}
-
+# Create a random integer resource.
 resource "random_integer" "number" {
   min = 1
   max = 100
 }
 
-resource "example_resource" "instances" {
-  count    = length(var.filenames)
-  filename = element(var.filenames, count.index)
-  content  = "Hello from instance ${count.index}!"
+# Create a custom resource based on the filenames variable.
+resource "random_pet" "instances" {
+  count    = var.is_enabled ? length(var.filenames) : 0
+  length   = 2  # Specify the length of the generated pet name.
 }
 
+# Define outputs to expose selected information.
 output "example_variables" {
+  description = "Selected configuration variables and values."
+
   value = {
     filenames  = var.filenames
     random_num = random_integer.number.result
-    is_true    = var.is_true
+    is_enabled = var.is_enabled
     strings    = var.strings
-    numbers    = map(keys(var.map_numbers), values(var.map_numbers))
-    string_set = var.string_set
-    user       = var.user
+    numbers    = var.map_numbers
   }
 }
+
+
 ```
 State (terraform.tfstate) & terraform import
 Terraform maintains infrastructure state in the terraform.tfstate file. This file automatically records resource attributes and relationships. Use terraform import to incorporate existing resources into Terraform management.
